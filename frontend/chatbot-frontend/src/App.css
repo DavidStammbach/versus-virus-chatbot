@@ -1,63 +1,8 @@
-/* .App {
-  text-align: center;
-}
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
- */
-
- header {
+header {
   display: flex;
   /* height: 18vh; */
   height: 18%;
-}
-
-.header-logo {
-  flex-grow: 1;
-  display: flex;
-  justify-content: start;
-  /* justify-content: left; */
-  align-items: center;
-}
-
-.header-logo img {
-  width: 200px;
-}
-
-.header-center {
-  flex-grow: 2;
 }
 
 .container {
@@ -66,13 +11,13 @@
 
 .content {
   display: flex;
+  background-color: white;
+  border-top: solid 0.1rem grey;
+  margin-top: 2vh;
 }
 
 .sidemenu {
   top: 56px;
-  /* With vh -> sidemenu will disappear at the bottom */
-  /* height: 100vh; */
-  /* With % -> sidemenu will stay below navbar, but on smaller screens scroll up */
   height: 100%;
   margin-top: 1vh;
   z-index: 1 !important;
@@ -85,9 +30,6 @@
   }
   .sidemenu {
       top: 56px;
-      /* With vh -> sidemenu will disappear at the bottom */
-      /* height: 100vh; */
-      /* With % -> sidemenu will stay below navbar, but on smaller screens scroll up */
       height: 100%;
       margin-top: 1vh;
       z-index: 1 !important;
@@ -102,6 +44,9 @@
       margin: 0vh 2vh;
       overflow-x: hidden;
   }
+  #bag-dashboard {
+    width: 300px !important;
+  }
 }
 
 @media only screen and (max-width: 480px) {
@@ -110,6 +55,9 @@
   }
   h1 {
       font-size: 28px;
+  }
+  #bag-dashboard {
+    width: 200px !important;
   }
 }
 
@@ -134,16 +82,13 @@ main {
 }
 
 
-/* TODO: TEST IF ELEMENT CAN BE STYLED, DOESNT SEEM TO BE WORKING...*/
-
 .nav-item {
   padding: 1vh 20vh 0vh 1vh;
 }
 
 section {
   /* margin: 0vh 2vh 2vh 2vh; */
-  margin: 0% 2% 4% 2%;
-  padding-top: 56px;
+  margin: 2% 2% 4% 2%;
 }
 
 h1 {
@@ -176,9 +121,13 @@ a:hover {
   color: grey;
 }
 
+body {
+  background-color: #d0d0d0;
+}
+
 #dashboard {
-  margin-top: 0;
-  padding-top: 0;
+  display: flex;
+  flex-direction: row;
 }
 
 #about {
@@ -187,8 +136,9 @@ a:hover {
 
 .tableauPlaceholder {
   position: relative; 
-  width: 1000px;
-  /* width: 800px; */
+  /* width: 1000px; */
+  /* width: 600px; */
+  flex: 4;
   height: 827px; 
   overflow: hidden; 
   display: block;
@@ -200,14 +150,48 @@ a:hover {
 
 #bag-dashboard {
   display: block;
-  width: 1000px;
-  /* width: 800px; */
+  /* width: 1000px; */
+  width: 500px;
   height: 827px;
   margin: 0px; 
   padding: 0px; 
   border: medium none;
 }
 
+#chatbot-container {
+  margin-left: 5vh;
+  flex: 6;
+}
+
 #chatbot {
-  min-width: 400px; width: 100%; min-height: 500px;
+  min-width: 100px; 
+  width: 100%; 
+  min-height: 500px;
+  border-radius: 5%;
+}
+
+#sidemenu-img {
+  margin-left: 2vh;
+}
+
+#sidemenu-zh {
+  margin-left: 2vh;
+}
+
+.sidemenu-zh-link {
+  /* border-top: solid 0.5px; */
+  border: 1px solid #d0d0d0;
+  /* border-color: grey; */
+  background-color: #f5f5f5;
+  font-size: 14px;
+  font-family: Helvetica,Arial,sans-serif !important;
+}
+
+#chatbot-link {
+  padding-top: 3px !important;
+  padding-left: 36px;
+  border-top: solid 0.1rem grey;
+  background-color: #f5f5f5;
+  font-size: 14px;
+  font-family: Helvetica,Arial,sans-serif !important;
 }
