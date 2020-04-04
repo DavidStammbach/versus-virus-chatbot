@@ -35,8 +35,8 @@ class DispatchBot(ActivityHandler):
                     Einführung von Kurzarbeit
                     Abrechnung von Kurzarbeitsentschädigung
                     Auszahlung der Kurzarbeitsentschädigung''')
-        elif self.state == 2:
-            self.state = 0
+        elif self.state == 3:
+            self.state -= 1
             reply = MessageFactory.text("Hast du noch mehr Fragen?")
 
 
@@ -79,7 +79,14 @@ class DispatchBot(ActivityHandler):
             intent = LuisRecognizer.top_intent(recognizer_result)
             # Next, we call the dispatcher with the top intent.
             await self._dispatch_to_top_intent(turn_context, intent)
+            self.state += 1
+            # TODO: make loop "Hast du noch mehr Fragen"
             await self.send_suggested_actions(turn_context)
+
+        elif self.state == 3:
+
+            pass
+
 
     async def _dispatch_to_top_intent(
             self, turn_context: TurnContext, intent
