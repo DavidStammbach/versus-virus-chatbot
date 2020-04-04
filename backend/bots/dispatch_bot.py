@@ -8,11 +8,15 @@ from botbuilder.ai.luis import LuisApplication, LuisRecognizer, LuisPredictionOp
 from botbuilder.core import ActivityHandler, TurnContext, RecognizerResult, MessageFactory
 from botbuilder.schema import ChannelAccount, SuggestedActions, CardAction, ActionTypes
 from config import DefaultConfig
+import pandas as pd
 
 
 class DispatchBot(ActivityHandler):
     def __init__(self, config: DefaultConfig):
+
+        self.response_dict = pd.read_excel('../Backend/intents.xlsx').set_index(['intent']).T.to_dict('list')
         self.state = 0
+        self.loop_flag = False
         luis_application = LuisApplication(
             config.LUIS_APP_ID,
             config.LUIS_API_KEY,
@@ -35,11 +39,11 @@ class DispatchBot(ActivityHandler):
                     Einführung von Kurzarbeit
                     Abrechnung von Kurzarbeitsentschädigung
                     Auszahlung der Kurzarbeitsentschädigung''')
-        elif self.state == 3:
+
+        elif self.state == 2:
             self.state -= 1
+            self.loop_flag = True
             reply = MessageFactory.text("Hast du noch mehr Fragen?")
-
-
 
         reply.suggested_actions = SuggestedActions(
             actions=[
@@ -71,7 +75,11 @@ class DispatchBot(ActivityHandler):
                 self.state += 1
                 await turn_context.send_activity("Alles klar. Was möchtest du wissen?")
             else:
-                await turn_context.send_activity("Rufe Hotline")
+                if self.loop_flag:
+                    await turn_context.send_activity("Tschau")
+                else:
+                    await turn_context.send_activity("Rufe Hotline")
+
         elif self.state == 2:
             # First, we use the dispatch model to determine which cognitive service (LUIS or QnA) to use.
             recognizer_result = await self.recognizer.recognize(turn_context)
@@ -79,18 +87,11 @@ class DispatchBot(ActivityHandler):
             intent = LuisRecognizer.top_intent(recognizer_result)
             # Next, we call the dispatcher with the top intent.
             await self._dispatch_to_top_intent(turn_context, intent)
-            self.state += 1
-            # TODO: make loop "Hast du noch mehr Fragen"
+            # Ask for more questions
             await self.send_suggested_actions(turn_context)
 
-        elif self.state == 3:
+    async def _dispatch_to_top_intent(self, turn_context: TurnContext, intent):
 
-            pass
-
-
-    async def _dispatch_to_top_intent(
-            self, turn_context: TurnContext, intent
-    ):
-        response = intent
-        # response = answer_lookup[intent]
+        response = str(self.response_dict[str(intent)][0])
         await turn_context.send_activity(response)
+
