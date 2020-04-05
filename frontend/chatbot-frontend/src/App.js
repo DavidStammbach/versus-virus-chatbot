@@ -3,7 +3,33 @@ import logo from './logo.svg';
 import './App.css';
 import ReactWebChat from './Webchat';
 
+var x = 0;
+
+function getUserID(x) {
+    console.log('getUserID')
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', "https://webchat.botframework.com/api/tokens", true);
+    xhr.setRequestHeader('Authorization', 'BotConnector ' + '3BGWHhdtp90.h-K3J-w_w_RWn13XIAC5Tb8hUVTdPIjl5cerr4Fh8xw');
+    xhr.send();
+    xhr.onreadystatechange = processRequest;
+
+    function processRequest(e) {
+      if (xhr.readyState == 4  && xhr.status == 200) {
+        var response = JSON.parse(xhr.responseText);
+        console.log('got response from server ' + response);
+        x = 1
+        document.getElementById("chat").src="https://webchat.botframework.com/embed/lucas-direct-line?t="+response
+      }
+    }
+    return x;
+}
+
 function App() {
+
+    if (x === 0) {
+        /* getUserID(x) */
+    }
+
     return (
         <div className="App">
             {/* <div className="container"> */}
@@ -67,8 +93,9 @@ function App() {
                         <div>
                             {/* <div id="chatbot-container"> */}
                             <h5 id="chatbot-title">Haben Sie Fragen zur Kurzarbeit?</h5>
-                            {/* <iframe id="chatbot" src='https://webchat.botframework.com/embed/versus-virus-bot?s=gBMtzerPyr0.o4xxgEoupK0Z4MCeTYCQvtBNn3Hdv0nqTmGiHWZrx0w'></iframe> */}
-                            <iframe id="chatbot" src='https://webchat.botframework.com/embed/versus-virus-testbot?s=wahwWXQF_jA.y1IlKOx7J26Q5bxcgaugRCKc113c6Y1DQ7Tg3LEpGjA'></iframe>
+                            <iframe id="chatbot" src='https://webchat.botframework.com/embed/versus-virus-bot?s=gBMtzerPyr0.o4xxgEoupK0Z4MCeTYCQvtBNn3Hdv0nqTmGiHWZrx0w'></iframe>
+                            {/* <iframe id="chatbot" src='https://webchat.botframework.com/embed/versus-virus-bot-2?s=3BGWHhdtp90.h-K3J-w_w_RWn13XIAC5Tb8hUVTdPIjl5cerr4Fh8xw'></iframe> */}
+                            {/* <iframe id="chat"></iframe> */}
                             {/* <ReactWebChat></ReactWebChat> */}
                         </div>
                         <div id="rss_feed">
