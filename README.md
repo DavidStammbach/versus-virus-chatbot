@@ -1,2 +1,4 @@
-# versus-virus-chatbot
-Versus Virus Hackathon 2020
+# Kurabot
+Chatbot that explains the purpose and conditions of short-time work (Kurzarbeit)
+
+Implemented for the Versus Virus Hackathon 2020
