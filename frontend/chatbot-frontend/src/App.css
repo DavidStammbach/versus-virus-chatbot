@@ -186,8 +186,17 @@ a:hover {
 }
 
 #rss_feed {
-  margin-top: 4vh;
-  margin-left: 10vh;
+  /* margin-top: 4vh; */
+  margin-left: 35vh;
+  font-size: small;
+}
+
+#news-title {
+  margin-top: 0;
+}
+
+#rss_feed h3 {
+  font-size: 14px;;
 }
 
 #chatbot-title {
@@ -200,6 +209,7 @@ a:hover {
   /* width: 100%; */
   min-height: 500px;
   border-radius: 10px;
+  /* border-color: blue; */
 }
 
 h5 {

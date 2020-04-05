@@ -32,13 +32,13 @@ class DispatchBot(ActivityHandler):
             reply = MessageFactory.text("Guten Tag, haben Sie Fragen zur Kurzarbeit?")
 
         elif self.state == 1:
-            reply = MessageFactory.text('''Haben Sie Fragen zu einem von diesen Punkten? \n
-                    - Anspruch auf Kurzarbeit \n
-                    - Anmeldung von Kurzarbeit \n
-                    - Beschluss der Arbeitslosenversicherung \n
-                    - Einführung von Kurzarbeit \n
-                    - Abrechnung von Kurzarbeit \n
-                    - Auszahlung der Kurzarbeitsentschädigung''')
+            reply = MessageFactory.text("Haben Sie Fragen zu einem von diesen Punkten? \n"
+                                        "- Anspruch auf Kurzarbeit \n"
+                                        "- Anmeldung von Kurzarbeit \n"
+                                        "- Beschluss der Arbeitslosenversicherung \n"
+                                        "- Einführung von Kurzarbeit \n"
+                                        "- Abrechnung von Kurzarbeit \n"
+                                        "- Auszahlung der Kurzarbeitsentschädigung ")
 
         elif self.state == 2:
             self.state -= 1
