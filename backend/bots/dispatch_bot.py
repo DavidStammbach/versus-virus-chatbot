@@ -62,7 +62,6 @@ class DispatchBot(ActivityHandler):
                 await self.send_suggested_actions(turn_context)
 
     async def on_message_activity(self, turn_context: TurnContext):
-
         if self.state == 0:
             if (turn_context.activity.text == 'Ja'):
                 self.state += 1
@@ -77,9 +76,11 @@ class DispatchBot(ActivityHandler):
                 await turn_context.send_activity("Alles klar. Was möchten Sie wissen?")
             else:
                 if self.loop_flag:
+                    self.state = 0
                     await turn_context.send_activity("Vielen Dank für Ihre Zeit. Bei weiteren Fragen können Sie sich gerne wieder melden oder die Hotline anrufen. \n\n"
                                                      "- **Hotline Arbeitslosenversicherung:** 043 259 26 40,  [E-Mail](alvhotline@vd.zh.ch) \n\n - **Callcenter Arbeitslosenkasse Kanton Zürich:** 043 258 10 00,  [E-Mail](alk@vd.zh.ch) \n\n - **SECO Infoline für Unternehmen:** 058 462 00 66, [E-Mail](coronavirus@seco.admin.ch)")
                 else:
+                    self.state = 0
                     await turn_context.send_activity("Gerne können Sie Ihre Frage zu einem späteren Zeitpunkt stellen oder die Hotline anrufen.\n\n"
                                                      "- **Hotline Arbeitslosenversicherung:** 043 259 26 40,  [E-Mail](alvhotline@vd.zh.ch) \n\n - **Callcenter Arbeitslosenkasse Kanton Zürich:** 043 258 10 00,  [E-Mail](alk@vd.zh.ch) \n\n - **SECO Infoline für Unternehmen:** 058 462 00 66, [E-Mail](coronavirus@seco.admin.ch)")
 
