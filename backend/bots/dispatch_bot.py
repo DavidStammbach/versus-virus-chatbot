@@ -29,21 +29,21 @@ class DispatchBot(ActivityHandler):
 
     async def send_suggested_actions(self, turn_context: TurnContext):
         if self.state == 0:
-            reply = MessageFactory.text("Guten Tag, haben sie Fragen zur Kurzarbeit?")
+            reply = MessageFactory.text("Guten Tag, haben Sie Fragen zur Kurzarbeit?")
 
         elif self.state == 1:
-            reply = MessageFactory.text('''Hast du eine Frage zu folgenden Punkten?
-                    Anspruch auf Kurzarbeit Entschädigung?
-                    Voranmeldung von Kurzarbeit
-                    Verfügung der Arbeitslosenversicherung
-                    Einführung von Kurzarbeit
-                    Abrechnung von Kurzarbeitsentschädigung
-                    Auszahlung der Kurzarbeitsentschädigung''')
+            reply = MessageFactory.text('''Haben Sie Fragen zu einem von diesen Punkten? \n
+                    - Anspruch auf Kurzarbeit \n
+                    - Anmeldung von Kurzarbeit \n
+                    - Beschluss der Arbeitslosenversicherung \n
+                    - Einführung von Kurzarbeit \n
+                    - Abrechnung von Kurzarbeit \n
+                    - Auszahlung der Kurzarbeitsentschädigung''')
 
         elif self.state == 2:
             self.state -= 1
             self.loop_flag = True
-            reply = MessageFactory.text("Hast du noch mehr Fragen?")
+            reply = MessageFactory.text("Haben Sie noch mehr Fragen?")
 
         reply.suggested_actions = SuggestedActions(
             actions=[
@@ -64,21 +64,24 @@ class DispatchBot(ActivityHandler):
     async def on_message_activity(self, turn_context: TurnContext):
 
         if self.state == 0:
-            if turn_context.activity.text == 'Ja':
+            if (turn_context.activity.text == 'Ja'):
                 self.state += 1
                 await self.send_suggested_actions(turn_context)
             else:
-                await turn_context.send_activity("Tschau")
+                await turn_context.send_activity("Vielen Dank für Ihre Zeit. Bei weiteren Fragen können Sie sich gerne wieder melden oder die Hotline anrufen. \n\n"
+                                                     "- **Hotline Arbeitslosenversicherung:** 043 259 26 40,  [E-Mail](alvhotline@vd.zh.ch) \n\n - **Callcenter Arbeitslosenkasse Kanton Zürich:** 043 258 10 00,  [E-Mail](alk@vd.zh.ch) \n\n - **SECO Infoline für Unternehmen:** 058 462 00 66, [E-Mail](coronavirus@seco.admin.ch)")
 
         elif self.state == 1:
             if turn_context.activity.text == 'Ja':
                 self.state += 1
-                await turn_context.send_activity("Alles klar. Was möchtest du wissen?")
+                await turn_context.send_activity("Alles klar. Was möchten Sie wissen?")
             else:
                 if self.loop_flag:
-                    await turn_context.send_activity("Tschau")
+                    await turn_context.send_activity("Vielen Dank für Ihre Zeit. Bei weiteren Fragen können Sie sich gerne wieder melden oder die Hotline anrufen. \n\n"
+                                                     "- **Hotline Arbeitslosenversicherung:** 043 259 26 40,  [E-Mail](alvhotline@vd.zh.ch) \n\n - **Callcenter Arbeitslosenkasse Kanton Zürich:** 043 258 10 00,  [E-Mail](alk@vd.zh.ch) \n\n - **SECO Infoline für Unternehmen:** 058 462 00 66, [E-Mail](coronavirus@seco.admin.ch)")
                 else:
-                    await turn_context.send_activity("Rufe Hotline")
+                    await turn_context.send_activity("Gerne können Sie Ihre Frage zu einem späteren Zeitpunkt stellen oder die Hotline anrufen.\n\n"
+                                                     "- **Hotline Arbeitslosenversicherung:** 043 259 26 40,  [E-Mail](alvhotline@vd.zh.ch) \n\n - **Callcenter Arbeitslosenkasse Kanton Zürich:** 043 258 10 00,  [E-Mail](alk@vd.zh.ch) \n\n - **SECO Infoline für Unternehmen:** 058 462 00 66, [E-Mail](coronavirus@seco.admin.ch)")
 
         elif self.state == 2:
             # First, we use the dispatch model to determine which cognitive service (LUIS or QnA) to use.
@@ -92,6 +95,7 @@ class DispatchBot(ActivityHandler):
 
     async def _dispatch_to_top_intent(self, turn_context: TurnContext, intent):
 
-        response = str(self.response_dict[str(intent)][0])
+        response = MessageFactory.text(self.response_dict[str(intent)][0].replace('\\n', '\n'))
+        response.text_format = 'markdown'
         await turn_context.send_activity(response)
 
