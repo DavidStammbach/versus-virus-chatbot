@@ -67,11 +67,54 @@ function App() {
                         <div>
                             {/* <div id="chatbot-container"> */}
                             <h5 id="chatbot-title">Haben Sie Fragen zur Kurzarbeit?</h5>
-                            <iframe id="chatbot" src='https://webchat.botframework.com/embed/versus-virus-bot?s=gBMtzerPyr0.o4xxgEoupK0Z4MCeTYCQvtBNn3Hdv0nqTmGiHWZrx0w'></iframe>
+                            {/* <iframe id="chatbot" src='https://webchat.botframework.com/embed/versus-virus-bot?s=gBMtzerPyr0.o4xxgEoupK0Z4MCeTYCQvtBNn3Hdv0nqTmGiHWZrx0w'></iframe> */}
+                            <iframe id="chatbot" src='https://webchat.botframework.com/embed/versus-virus-testbot?s=wahwWXQF_jA.y1IlKOx7J26Q5bxcgaugRCKc113c6Y1DQ7Tg3LEpGjA'></iframe>
                             {/* <ReactWebChat></ReactWebChat> */}
                         </div>
                         <div id="rss_feed">
-                            <img src="./RSS_Feed.png"></img>
+                            {/* <img src="./RSS_Feed.png"></img> */}
+                            <div class="list-group news-feed">
+                                <div class="list-group">
+                                    <div class="list-group-header">
+                                        <h5 id="news-title" class="pull-left">Medienmitteilungen</h5>
+                                        <a href="https://www.bag.admin.ch/bag/de/home/das-bag/aktuell/medienmitteilungen.html" target="_blank" rel="noopener noreferrer" title="Alle" class="pull-right icon icon--before icon--list">
+                                            Alle
+								</a>
+                                    </div>
+                                </div>
+                                <div class="scroll-y mod mod-dynamic js-equalheight done equalheight-ready" data-equalheight-line="true" data-url="/bag/de/home/_jcr_content/par/columncontrols_1/items/1/column/nsbnewslist.entries.html" aria-live="off" aria-atomic="true" aria-relevant="all" data-connectors="dynamicNewsList"><div class="mod mod-nsbnewslist">
+                                    {/* <input class="add-param" type="hidden" name="startDate" value="" aria-hidden="true" style="height: 0px;">
+			<input class="add-param" type="hidden" name="endDate" value="2020-04-05" aria-hidden="true" style="height: 0px;">
+			<input class="add-param" type="hidden" name="organization" value="317" aria-hidden="true" style="height: 0px;">
+			<input class="add-param" type="hidden" name="topic" value="" aria-hidden="true" style="height: 0px;"> */}
+
+                                    <div class="list-group-item">
+                                        <p>
+                                            03.04.2020</p>
+                                        <h3>
+                                            <a href="https://www.bag.admin.ch/bag/de/home/das-bag/aktuell/medienmitteilungen.msg-id-78686.html" target="_blank" rel="noopener noreferrer">
+                                                Coronavirus: Bundesrat regelt Versorgung mit wichtigen medizinischen Gütern</a>
+                                        </h3>
+                                    </div>
+                                    <div class="list-group-item">
+                                        <p>
+                                            03.04.2020</p>
+                                        <h3>
+                                            <a href="https://www.bag.admin.ch/bag/de/home/das-bag/aktuell/medienmitteilungen.msg-id-78685.html" target="_blank" rel="noopener noreferrer">
+                                                Anne Lévy wird neue Direktorin des Bundesamts für Gesundheit</a>
+                                        </h3>
+                                    </div>
+                                    <div class="list-group-item">
+                                        <p>
+                                            02.04.2020</p>
+                                        <h3>
+                                            <a href="https://www.bag.admin.ch/bag/de/home/das-bag/aktuell/medienmitteilungen.msg-id-78658.html" target="_blank" rel="noopener noreferrer">
+                                                Vereinfachter Zugang zu Arzneimitteln gegen dermatologische und urogenitale Erkrankungen</a>
+                                        </h3>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
                         </div>
                         <div id="rss-feed">
                         </div>
@@ -98,8 +141,8 @@ function App() {
                         <ReactWebChat></ReactWebChat>
                     </section> */}
                     <section id="about">
-                        <h5>About</h5>
-                        <p>Webapp created for the <a target="_blank" rel="noopener noreferrer" href="https://www.versusvirus.ch/">Versus Virus Hackathon 2020</a></p>
+                        <h5>Über</h5>
+                        <p>Webapplikation für den <a target="_blank" rel="noopener noreferrer" href="https://www.versusvirus.ch/">Versus Virus Hackathon 2020</a></p>
                     </section>
                 </main>
 
@@ -108,10 +151,10 @@ function App() {
             <footer className="text-center">
                 &copy;
                 <div>
-                    David Stammbach<br/>
-                    Jürg Käser<br/>
-                    Minh-kha Nguyen<br/>
-                    Torben Mannhart<br/>
+                    David Stammbach<br />
+                    Jürg Käser<br />
+                    Minh-kha Nguyen<br />
+                    Torben Mannhart<br />
                 </div>
             </footer>
 
