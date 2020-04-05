@@ -80,6 +80,12 @@ async def messages(req: Request) -> Response:
 APP = web.Application(middlewares=[aiohttp_error_middleware])
 APP.router.add_post("/api/messages", messages)
 
+async def root_handler(request):
+    return web.HTTPFound('/index.html')
+
+APP.router.add_route('*', '/', root_handler)
+APP.router.add_static('/', './build')
+
 if __name__ == "__main__":
     try:
         web.run_app(APP, host="localhost", port=CONFIG.PORT)
