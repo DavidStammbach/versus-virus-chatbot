@@ -1,0 +1,208 @@
+
+header {
+  /* background-image: url("./color_red.png"); */
+  background-image: url("./color.png");
+  display: flex;
+  height: 24vh;
+  /* height: 18vh; */
+  /* height: 18%; */
+}
+
+.header-logo {
+  flex-grow: 1;
+  display: flex;
+  justify-content: start;
+  /* justify-content: left; */
+  align-items: center;
+}
+
+.header-logo img {
+  width: 200px;
+}
+
+.header-center {
+  flex-grow: 2;
+}
+
+.container {
+  padding: 0;
+}
+
+.content {
+  display: flex;
+}
+
+.sidemenu {
+  top: 56px;
+  /* With vh -> sidemenu will disappear at the bottom */
+  /* height: 100vh; */
+  /* With % -> sidemenu will stay below navbar, but on smaller screens scroll up */
+  height: 100%;
+  margin-top: 1vh;
+  z-index: 1 !important;
+}
+
+@media only screen and (max-width: 992px) {
+  .header-logo img {
+      padding-left: 2vh;
+      width: 180px;
+  }
+  .sidemenu {
+      top: 56px;
+      /* With vh -> sidemenu will disappear at the bottom */
+      /* height: 100vh; */
+      /* With % -> sidemenu will stay below navbar, but on smaller screens scroll up */
+      height: 100%;
+      margin-top: 1vh;
+      z-index: 1 !important;
+  }
+  .nav-item {
+      padding: 1vh 8vh 0vh 1vh !important;
+  }
+  td {
+      display: block;
+  }
+  main {
+      margin: 0vh 2vh;
+      overflow-x: hidden;
+  }
+  #bag-dashboard {
+    width: 800px !important;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .nav-item {
+      padding: 1vh 3vh 0vh 1vh !important;
+  }
+  h1 {
+      font-size: 28px;
+  }
+  #bag-dashboard {
+    width: 400px !important;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  h1 {
+      font-weight: bold;
+      font-size: 23px;
+  }
+  h4 {
+      font-size: 18px;
+  }
+  #bag-dashboard {
+    width: 300px !important;
+  }
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  flex: 5;
+}
+
+.navbar {
+  height: 56px;
+}
+
+
+/* TODO: TEST IF ELEMENT CAN BE STYLED, DOESNT SEEM TO BE WORKING...*/
+
+.nav-item {
+  padding: 1vh 20vh 0vh 1vh;
+}
+
+section {
+  /* margin: 0vh 2vh 2vh 2vh; */
+  margin: 0% 2% 4% 2%;
+  padding-top: 56px;
+}
+
+h1 {
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+}
+
+h6 {
+  font-style: italic;
+}
+
+footer {
+  margin-top: 10vh;
+  margin-bottom: 56px;
+}
+
+#copyright {
+  height: 200px;
+  line-height: 200px;
+  text-align: center;
+  background-color: #f8f9fa;
+}
+
+a {
+  text-decoration: none !important;
+  color: black;
+}
+
+a:hover {
+  color: grey;
+}
+
+#dashboard {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+#about {
+  margin-top: 10vh;
+}
+
+.tableauPlaceholder {
+  position: relative; 
+  width: 1000px;
+  /* width: 800px; */
+  height: 827px; 
+  overflow: hidden; 
+  display: block;
+}
+ 
+#bag-dashboard {
+  display: block;
+  width: 1000px;
+  /* width: 800px; */
+  height: 827px;
+  margin: 0px; 
+  padding: 0px; 
+  border: medium none;
+}
+
+#chatbot-container {
+  margin-top: 3vh !important;
+  padding-top: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#rss_feed {
+  margin-top: 4vh;
+  margin-left: 10vh;
+}
+
+#chatbot-title {
+  margin-top: 0;
+}
+
+#chatbot {
+  min-width: 400px; 
+  width: 100%;
+  /* width: 100%; */
+  min-height: 500px;
+  border-radius: 10px;
+}
+
+h5 {
+  margin-top: 5vh;
+  margin-bottom: 1vh;
+}
