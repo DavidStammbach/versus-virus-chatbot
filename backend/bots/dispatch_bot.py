@@ -9,6 +9,7 @@ from botbuilder.core import ActivityHandler, TurnContext, RecognizerResult, Mess
 from botbuilder.schema import ChannelAccount, SuggestedActions, CardAction, ActionTypes
 from config import DefaultConfig
 import pandas as pd
+import datetime
 
 
 class DispatchBot(ActivityHandler):
@@ -60,7 +61,7 @@ class DispatchBot(ActivityHandler):
         for member in members_added:
             if member.id != turn_context.activity.recipient.id:
                 # await self.send_suggested_actions(turn_context)
-                print("hello")
+                print(datetime.datetime.now())
 
     async def on_message_activity(self, turn_context: TurnContext):
 
@@ -70,20 +71,26 @@ class DispatchBot(ActivityHandler):
             self.state += 1
 
         elif self.state == 1:
-            if (turn_context.activity.text == 'Ja'):
+            if turn_context.activity.text == 'Ja':
                 self.state += 1
                 await self.send_suggested_actions(turn_context)
-            else:
+            elif turn_context.activity.text == 'Nein':
                 self.state = 0
                 await turn_context.send_activity("Vielen Dank für Ihre Zeit. Bei weiteren Fragen können Sie sich gerne wieder melden oder die Hotline anrufen. \n\n"
                                                      "- **Hotline Arbeitslosenversicherung:** 043 259 26 40,  [E-Mail](alvhotline@vd.zh.ch) \n\n - **Callcenter Arbeitslosenkasse Kanton Zürich:** 043 258 10 00,  [E-Mail](alk@vd.zh.ch) \n\n - **SECO Infoline für Unternehmen:** 058 462 00 66, [E-Mail](coronavirus@seco.admin.ch)")
-
+            else:
+                self.state += 2
+                recognizer_result = await self.recognizer.recognize(turn_context)
+                intent = LuisRecognizer.top_intent(recognizer_result)
+                await self._dispatch_to_top_intent(turn_context, intent)
+                await self.send_suggested_actions(turn_context)
 
         elif self.state == 2:
             if turn_context.activity.text == 'Ja':
                 self.state += 1
                 await turn_context.send_activity("Alles klar. Was möchten Sie wissen?")
-            else:
+
+            elif turn_context.activity.text == 'Nein':
                 if self.loop_flag:
                     self.state = 0
                     await turn_context.send_activity("Vielen Dank für Ihre Zeit. Bei weiteren Fragen können Sie sich gerne wieder melden oder die Hotline anrufen. \n\n"
@@ -92,6 +99,14 @@ class DispatchBot(ActivityHandler):
                     self.state = 0
                     await turn_context.send_activity("Gerne können Sie Ihre Frage zu einem späteren Zeitpunkt stellen oder die Hotline anrufen.\n\n"
                                                      "- **Hotline Arbeitslosenversicherung:** 043 259 26 40,  [E-Mail](alvhotline@vd.zh.ch) \n\n - **Callcenter Arbeitslosenkasse Kanton Zürich:** 043 258 10 00,  [E-Mail](alk@vd.zh.ch) \n\n - **SECO Infoline für Unternehmen:** 058 462 00 66, [E-Mail](coronavirus@seco.admin.ch)")
+
+            else:
+                self.state += 1
+                recognizer_result = await  self.recognizer.recognize(turn_context)
+                intent = LuisRecognizer.top_intent(recognizer_result)
+                await self._dispatch_to_top_intent(turn_context, intent)
+                await self.send_suggested_actions(turn_context)
+
 
         elif self.state == 3:
             # First, we use the dispatch model to determine which cognitive service (LUIS or QnA) to use.
