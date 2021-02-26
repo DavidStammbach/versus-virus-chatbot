@@ -3,6 +3,6 @@ botbuilder-ai>=4.8.0
 botbuilder-core==4.8.0
 botbuilder-schema==4.8.0
 pandas==0.25.1
-aiohttp==3.6.2
+aiohttp==3.7.4
 
 
